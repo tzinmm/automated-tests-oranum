@@ -11,7 +11,8 @@ exports.config = {
     Playwright: {
       url: 'https://www.oranum.com/en/new',
       show: true,
-      browser: 'chromium'
+      browser: 'chromium',
+      waitForAction: 3000
     }
   },
   include: {
