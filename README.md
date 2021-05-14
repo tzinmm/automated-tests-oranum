@@ -38,6 +38,14 @@ npx codeceptjs run --grep "REQ-5" --reporter mochawesome
 
 4- Open the file in a browser
 
+# Additional Information
+
+In a full execution, it is expected to have 1 failed test case.
+
+There is a discrepancy between the REQ-4 and the current navigation on the page because the "Start Private Show" button, located at the top right corner, does not open the Sign Up overlay instead, the Free Registration prompt appears.
+
+Test Case:  Sign up dialog apppears when 'Start Private Show' is clicked {"position":"7"}
+
 
 # Final notes
 Thank you for taking the time to review this code and I honestly had much fun creating this project with CodeceptJS.
