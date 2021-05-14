@@ -8,7 +8,7 @@ Install the packages with:
 
 npm i
 
-# Executing the test cases
+# Executing ALL the test cases
 npx codeceptjs run --features --reporter mochawesome
 
 # Executing test cases per requirement 
@@ -29,10 +29,15 @@ npx codeceptjs run --grep "REQ-4" --reporter mochawesome
 npx codeceptjs run --grep "REQ-5" --reporter mochawesome
 
 # Steps to open Mochawesome report
+
 1- On project's root folder locate the mochawesome-report folder
+
 2- Right-click on mochawesome.html file
+
 3- Open file in explorer (Windows)
+
 4- Open the file in a browser
+
 
 # Final notes
 Thank you for taking the time to review this code and I honestly had much fun creating this project with CodeceptJS.
