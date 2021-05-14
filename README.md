@@ -14,15 +14,19 @@ npx codeceptjs run --features --reporter mochawesome
 # Executing test cases per requirement 
 
 - REQ-1
+
 npx codeceptjs run --grep "REQ-1" --reporter mochawesome
 
 - REQ-3 & REQ-2
+
 npx codeceptjs run --grep "REQ-3" --reporter mochawesome
 
 - REQ-4
+
 npx codeceptjs run --grep "REQ-4" --reporter mochawesome
 
 - REQ-5
+
 npx codeceptjs run --grep "REQ-5" --reporter mochawesome
 
 # Steps to open Mochawesome report
