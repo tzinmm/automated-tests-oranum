@@ -31,6 +31,9 @@ npx codeceptjs run --grep "REQ-5" --reporter mochawesome
 
 # Steps to open Mochawesome report
 
+**Before following the step, the tests should be executed with the command --reporter mochawesome
+as appears in the above examples.
+
 1- On project's root folder locate the mochawesome-report folder
 
 2- Right-click on mochawesome.html file
