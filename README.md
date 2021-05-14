@@ -16,10 +16,7 @@ npx codeceptjs run --features --reporter mochawesome
 - REQ-1
 npx codeceptjs run --grep "REQ-1" --reporter mochawesome
 
-- REQ-2
-npx codeceptjs run --grep "REQ-2" --reporter mochawesome
-
-- REQ-3
+- REQ-3 & REQ-2
 npx codeceptjs run --grep "REQ-3" --reporter mochawesome
 
 - REQ-4

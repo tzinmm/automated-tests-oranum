@@ -9,11 +9,6 @@ Before(() => {
 Given('I am in Oranum Home Page', () => {
     I.seeInTitle('Oranum – Free Online Psychic & Tarot Readings, 24/7 Live Video Chat')
 });
-/*Given('I am in Oranum Home Page', async () => {
-    I.amOnPage('/');
-    I.waitForElement('//div[starts-with(@id,"container_")]',10)
-    //I.seeElement('//div[starts-with(@id,"container_")]')
-});*/
 
 When('I scrolldown to Show More button', async () => {
     await I.scrollToShowMoreBtn();

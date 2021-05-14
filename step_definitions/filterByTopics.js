@@ -3,10 +3,6 @@ const _ = require('lodash');
 var assert = require('assert');
 const { Console } = require('console');
 
-/*Before(() => {
-    I.amOnPage('/');
-})*/
-
 Given('I am in Oranum Home Page', () => {
     I.amOnPage('/');
     I.seeInTitle('Oranum – Free Online Psychic & Tarot Readings, 24/7 Live Video Chat');
