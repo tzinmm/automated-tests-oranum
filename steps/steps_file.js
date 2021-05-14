@@ -16,8 +16,8 @@ module.exports = function () {
         this.pressKey('End')
         time_sec_after = Math.floor(Date.now() / 1000)
         diff = time_sec_after - time_sec_prev;
-        if(diff > 20){
-          this.refreshPage()
+        if(diff > 15){
+          this.pressKey('ArrowUp')
         }
       }
     },

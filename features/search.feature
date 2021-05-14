@@ -19,7 +19,7 @@ Scenario: Search Input field displays Placeholder
             | Myst        |
             | Ann         |
             | psy         |
-            
+
     Scenario Outline: Search for Psychics by full text
         Given I am in Oranum Home Page
         When I click on the Search icon
