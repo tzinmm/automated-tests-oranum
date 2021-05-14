@@ -1,69 +1,75 @@
+const { I } = inject();
 const _ = require('lodash');
 var assert = require('assert');
 
-Feature('REQ1 - Home Page');
-
-Before(({ I }) => {
+Before(() => {
     I.amOnPage('/');
+})
+
+Given('I am in Oranum Home Page', () => {
+    I.seeInTitle('Oranum – Free Online Psychic & Tarot Readings, 24/7 Live Video Chat')
 });
+/*Given('I am in Oranum Home Page', async () => {
+    I.amOnPage('/');
+    I.waitForElement('//div[starts-with(@id,"container_")]',10)
+    //I.seeElement('//div[starts-with(@id,"container_")]')
+});*/
 
-
-Scenario('Verify "Show More" button loads more psychics', async ({ I }) => {
-    await I.scrollToShowMoreBtn()
+When('I scrolldown to Show More button', async () => {
+    await I.scrollToShowMoreBtn();
 
     // Validation of "Show More" button
-    I.seeElement('#show_more_btn a')
-    I.saveElementScreenshot('#show_more_btn a', 'Show_More_Btn.png')
+    I.seeElement('#show_more_btn a');
+    I.saveElementScreenshot('#show_more_btn a', 'Show_More_Btn.png');
+})
 
-    const list_psychics_before = await I.grabAttributeFromAll('//div[starts-with(@id,"container_")]/a', 'href')
+When('I click Show More button', () => {
+    I.click('#show_more_btn a');
+})
 
-    I.click('#show_more_btn a')
-    // Validation of new psychics being loaded
-    const list_psychics_after = await I.grabAttributeFromAll('//div[starts-with(@id,"container_")]/a', 'href')
+Then('I should see more Psychic Cards', () => {
+    I.seeElement('//section[@data-page-id="4"]');
+})
 
-    let new_psychics_loaded = false;
-    if (list_psychics_before.length < list_psychics_after.length) {
-        new_psychics_loaded = true;
-    }
-    assert.strictEqual(new_psychics_loaded, true)
-});
-
-Scenario('Verify there are no visible duplicate psychics', async ({ I }) => {
-    await I.scrollToShowMoreBtn()
-
-    I.seeElement('#show_more_btn a')
-    I.click('#show_more_btn a')
-
+Then('I should see unique psychic cards', async () => {
     let duplicates = await I.getNumberOfDuplicates('//div[starts-with(@id,"container_")]/a', 'href')
 
     // In case the assert fails, the log displays the indexes of the duplicates
     console.log('Duplicated Links Index: ' + duplicates);
 
     assert.strictEqual(duplicates.length, 0, 'There should be 0 duplicates of psychics');
-});
+})
 
-Scenario('Each psychic displays Img, Lang, Nickname, Rating and Status', async ({ I }) => {
-
+Then('I see an image in each card', async () => {
     // To retrieve number of Psychic Cards visible
     let numOfElements = await I.grabNumberOfVisibleElements('//div[starts-with(@id,"container_")]/a');
     I.seeNumberOfElements('//div[starts-with(@id,"container_")]//img[@class="stream__img"]', numOfElements);
 
+})
+
+Then('I see a language label and flags in each card', async () => {
+    let numOfElements = await I.grabNumberOfVisibleElements('//div[starts-with(@id,"container_")]/a');
     // Validation of Languages Label
+
     let lblLang = await I.grabTextFromAll('//div[starts-with(@id,"container_")]/descendant::td[@class="list__item-lang"]');
     assert.strictEqual(lblLang.length, numOfElements);
+
     for (var i = 0; i < lblLang.length; i++) {
         assert.strictEqual(_.trim(lblLang[i]), 'Languages:');
     }
 
-    // Validation that the correct information is visible for each Psychic Card
     for (var i = 1; i <= numOfElements; i++) {
         within('(//div[starts-with(@id,"container_")])[position()=' + (numOfElements) + ']', () => {
 
             // Validates that at least one Language Flag is visible 
             I.seeElement('//td[@class="list__item-lang"]//div[contains(@class,"flag_")]');
         })
-
     }
+})
+
+Then('I see a nickname in each card', async () => {
+    // To retrieve number of Psychic Cards visible
+    let numOfElements = await I.grabNumberOfVisibleElements('//div[starts-with(@id,"container_")]/a');
 
     // Validates that the Nickname is visible
     I.seeNumberOfVisibleElements('//div[starts-with(@id,"container_")]//td[@class="list__item-title"]/h2', numOfElements);
@@ -75,8 +81,19 @@ Scenario('Each psychic displays Img, Lang, Nickname, Rating and Status', async (
         }
     }
 
-    // Validates Rating Stars, each card must contain 5 stars
+    assert.strictEqual(nicknameNotNull, true)
+})
+
+Then('I see 5 stars for rating in each card', async () => {
+    // To retrieve number of Psychic Cards visible
+    let numOfElements = await I.grabNumberOfVisibleElements('//div[starts-with(@id,"container_")]/a');
+
     I.seeNumberOfVisibleElements('//div[starts-with(@id,"container_")]//i[contains(@class,"icon-star")]', (numOfElements * 5));
+})
+
+Then('I see a valid status in each card', async () => {
+    // To retrieve number of Psychic Cards visible
+    let numOfElements = await I.grabNumberOfVisibleElements('//div[starts-with(@id,"container_")]/a');
 
     // Verify that only valid status are displayed
     I.seeNumberOfVisibleElements('//div[starts-with(@id,"container_")]//div[contains(@class,"stream__status")]', numOfElements);
@@ -89,9 +106,4 @@ Scenario('Each psychic displays Img, Lang, Nickname, Rating and Status', async (
     }
 
     assert.strictEqual(allStatusValid, true)
-    assert.strictEqual(nicknameNotNull, true)
-
-});
-
-
-
+})

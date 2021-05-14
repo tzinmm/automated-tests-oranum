@@ -1,17 +1,17 @@
-Feature: Filtering by Topics
+@REQ-5
+Feature: Filtering by Category
 
-    Scenario Outline: Topic Love and Relationship
+    Scenario Outline: Filter Psychics by Categories
         Given I am in Oranum Home Page
         When I click on Live Psychics button
-        And I filter by "<topics>"
-        Then I see the matching Psychics filtered by
+        And I filter by "<category>"
+        Then I see the matching Psychics filtered by "<category>"
 
         Examples:
-            | topics                |
+            | category              |
             | Love and Relationship |
-            #| Tarot and Cards       |tarot,cards,reading|
-            #| Dream Interpretation  |dream,analysis|
-            #| Astrology             |astrology,horoscope|
-            #| Spiritual Guides      |angel,spiritual,guidance,communication|
-            #| Home and Family       |career,work,family,traveling|
-            #| Numerology            |cards,guidancen,reading,life,path,karmic,numbers|
+            | Dream Interpretation  |
+            | Astrology             |
+            | Spiritual Guides      |
+            | Home and Family       |
+            | Numerology            |

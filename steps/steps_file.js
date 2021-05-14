@@ -8,10 +8,17 @@ module.exports = function () {
       // This attribute appears changes if more items are being loaded
       let loading = await this.grabAttributeFrom('#listpage', 'class')
 
+      time_sec_prev = Math.floor(Date.now() / 1000)
+
       // The scrolldown will stop once there are no more items to load
       while (_.trim(loading) != 'show_more_visible') {
         loading = await this.grabAttributeFrom('#listpage', 'class')
         this.pressKey('End')
+        time_sec_after = Math.floor(Date.now() / 1000)
+        diff = time_sec_after - time_sec_prev;
+        if(diff > 20){
+          this.refreshPage()
+        }
       }
     },
 
@@ -45,9 +52,7 @@ module.exports = function () {
               nicknameNotNull = false;
           }
       }
-    }
-
-    
+    }, 
 
   });
 }

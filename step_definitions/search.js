@@ -38,10 +38,7 @@ When('I click on the result with the exact match {string}', (psychicName) => {
 Then('I should see the Placeholder', async () => {
     I.seeElement('#header_search_bar')
     let placeholdVal = await I.grabAttributeFrom('#header_search_bar', 'placeholder')
-    console.log(placeholdVal)
-    //assert.strictEqual(placeholdVal,'Search for psychics by name')
-
-    //I.seeInField('#header_search_bar', 'Search for psychics by name')
+    assert.strictEqual(placeholdVal,'Search for psychics by name')
 })
 
 Then('I should see results that contain the partial text {string}', async (partialText) => {
@@ -51,9 +48,10 @@ Then('I should see results that contain the partial text {string}', async (parti
     let partialTxtExists = [];
     let countInvalid = 0;
     for (var i = 0; i < numOfElements; i++) {
-        if (nicknames[i].includes(partialText) != true || nicknames[i].includes(_.lowerCase(partialText)) != true) {
+        //if (_.lowerCase(nicknames[i]).includes(_.lowerCase(partialText)) != true && nicknames[i].includes(_.lowerCase(partialText)) != true)
+        if (_.lowerCase(nicknames[i]).includes(_.lowerCase(partialText)) != true) {
             partialTxtExists.push(nicknames[i]);
-            countInvalid = countInvalid++;
+            countInvalid+=1;
         }
     }
 
@@ -61,17 +59,14 @@ Then('I should see results that contain the partial text {string}', async (parti
 })
 
 Then('I should see the Psychic {string} profile', async (psychicName) => {
-
     // Wait until container is no longer hidden
     I.waitForElement('//div[@id="chatblock"][contains(@class,"show-html")]')
-    I.waitForElement('//div[@id="channel_block_container"][@class="grid3"]')
 
     // Validation of Buy Credits button
     I.seeElement('#button-credits-label')
 
-    // Validation Biography element
-    I.seeElement('.bio_content')
-    let profileName = await I.grabTextFrom('//h1[@class="freechat_title"]')
-    assert.strictEqual(_.trim(profileName),psychicName)
+    // Validation of Profile being displayed
+    let url = await I.grabCurrentUrl();
+    assert.strictEqual(url.includes(psychicName),true)
 })
 

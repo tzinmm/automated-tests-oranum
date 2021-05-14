@@ -1,5 +1,10 @@
 exports.config = {
   output: './output',
+  multiple: {
+    basic: {
+      browsers: ["chrome","firefox"]
+    }
+  },
   helpers: {
     Playwright: {
       url: 'https://www.oranum.com/en/new',
@@ -18,10 +23,10 @@ exports.config = {
   hooks: [],
   gherkin: {
     features: './features/*.feature',
-    steps: ['./step_definitions/steps.js',
-    './step_definitions/search.js',
+    steps: ['./step_definitions/search.js',
     './step_definitions/signUp.js',
-    './step_definitions/filterByTopics.js']
+    './step_definitions/filterByTopics.js',
+    './step_definitions/homePage.js']
   },
   plugins: {
     screenshotOnFail: {
@@ -33,7 +38,8 @@ exports.config = {
     },
     tryTo: {
       enabled: true
-    }
+    },
+    allure: {}
   },
   tests: './tests/*_test.js',
   name: 'automated-tests-oranum'

@@ -1,6 +1,7 @@
+@REQ-3
 Feature: Search for Psychics from Home Page
 
-    Scenario: Search Input field displays Placeholder
+Scenario: Search Input field displays Placeholder
         Given I am in Oranum Home Page
         When I click on the Search icon
         Then I should see the Placeholder
@@ -14,11 +15,11 @@ Feature: Search for Psychics from Home Page
 
         Examples:
             | partialText |
-            | Matt |
-            | Myst |
-            | Ann  |
-            | psy  |
-    
+            | Matt        |
+            | Myst        |
+            | Ann         |
+            | psy         |
+            
     Scenario Outline: Search for Psychics by full text
         Given I am in Oranum Home Page
         When I click on the Search icon
@@ -27,7 +28,7 @@ Feature: Search for Psychics from Home Page
         Then I should see the Psychic "<psychicName>" profile
 
         Examples:
-            | psychicName |
-            | MattWarren |
+            | psychicName  |
+            | MattWarren   |
             | MysticMilena |
-            | EternalFlame  |
+            | EternalFlame |
